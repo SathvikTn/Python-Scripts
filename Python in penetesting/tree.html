@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<style>
+.node
+{
+    padding-left: 20px;
+    display: block;
+}
+
+.node_collapsed
+{
+    padding-left: 20px;
+    display: none;
+
+    
+    visibility: hidden;
+    display: none;
+}
+
+
+
+a:active
+{
+text-decoration:none;
+color: #0000FF;
+font-weight: bold;
+}
+
+a:visited
+{
+text-decoration:none;
+color: #000;
+font-weight: bold;
+}
+
+a:link
+{
+text-decoration:none;
+color: #000;
+font-weight: bold;
+}
+
+a:hover
+{
+text-decoration: underline;
+color: #500;
+font-weight: bold;
+}
+
+</style>
+
+
+<script language="javascript">
+  
+    var displayStates = [];
+
+    function showDiv(div)
+    {    
+        div.style.height     = "";
+        div.style.display    = "block";
+        div.style.visibility = "visible";
+    }
+
+    function hideDiv(div)
+    {
+        div.style.height     = "0px";
+        div.style.display    = "none";      
+        div.style.visibility = "hidden";
+    }
+
+    function toggleDiv(div, defaultState)
+    {
+
+        // set default on first use
+        if (displayStates[div] == undefined)
+            displayStates[div] = defaultState;
+
+        // toggle state
+        displayStates[div] = !displayStates[div];       
+
+        // hide / show
+        if (displayStates[div])
+            showDiv(div);
+        else {
+            hideDiv(div);
+        }
+    }
+
+    function toggleDivName(divname, defaultState)
+    {
+        toggleDiv(document.getElementById(divname), defaultState);
+    }
+
+</script>
+
+<nobr><tt><a href='javascript: toggleDivName("026b3745-51a0-4564-a56f-fdf5d7d69c2c", true)'>+</a>&nbsp;</tt>Python in penetesting</nobr><br/>
+<div id='026b3745-51a0-4564-a56f-fdf5d7d69c2c' class='node'><nobr><tt>&nbsp;&nbsp;</tt><a href='inforecon/page.html' target='viewer'>Inforecon</a></nobr><br/>
+<nobr><tt>&nbsp;&nbsp;</tt><a href='port%20scanner%20with%20nmap%20in%20python/page.html' target='viewer'>Port scanner with NMAP in python</a></nobr><br/>
+<nobr><tt>&nbsp;&nbsp;</tt><a href='grabbing%20screenshots%20with%20python/page.html' target='viewer'>Grabbing screenshots with python</a></nobr><br/>
+<nobr><tt>&nbsp;&nbsp;</tt><a href='trash' target='viewer'>Trash</a></nobr><br/>
+</div>
+</body></html>
