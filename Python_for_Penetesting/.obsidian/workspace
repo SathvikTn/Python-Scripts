@@ -1,0 +1,102 @@
+{
+  "main": {
+    "id": "1e374e77b0b0791a",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f8793525cb61820",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "The Socket Module for Network Communication - A TCP Server-Client.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3db6f4012d104028",
+    "type": "split",
+    "children": [
+      {
+        "id": "2844666fb1ca70a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a6fb7f3b8eaf5a3d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "71a0361ed74ed41a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b9e4946381269f96",
+    "type": "split",
+    "children": [
+      {
+        "id": "11f3049460f9bf80",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "51c22e0cf0ffeeb7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "The Socket Module for Network Communication - A TCP Server-Client.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "2f8793525cb61820",
+  "lastOpenFiles": [
+    "The Socket Module for Network Communication - A TCP Server-Client.md",
+    "Scapy Module for Network Traffic Sniffing and Manipulation.md",
+    "Spoofing MAC Address with Python (LINUX).md",
+    "Port scanner with NMAP in Python.md",
+    "Inforecon.md",
+    "Grabbing screenshots with Python.md",
+    "Finding Hidden Wireless Networks with Python.md",
+    "Attacking Web Forms with requests and BeautifulSoup in Python.md",
+    "Cracking MD5 Hashes with Python and Hashlib.md",
+    "Discovering Subdomains with Python.md"
+  ]
+}
