@@ -1,7 +1,10 @@
 #for pycharm, use "if __name__ == '__main__': " before the code to run the code.
 
 #7 Tricks of python
-#list comprehension
+
+#-------------------------------------------------------------------------------------------------------------------------------
+#1 list comprehension
+
 #before
 def square():
     x = list(map(int, input().split()))
@@ -19,7 +22,8 @@ def squares():
     print(y)
 #squares()
 
-#lambda function
+#-------------------------------------------------------------------------------------------------------------------------------
+#2 lambda function
 
 x = [1,2,3,4,5]
 
@@ -33,27 +37,39 @@ def s(n):
 double = s(2)             #function where n = 2
 print(double(10))         #function where n = 2 and x = 10..so 20 is ans
 
-#map
+#-------------------------------------------------------------------------------------------------------------------------------
+#3 map
+
 def a(i):
     return i**2
 x = [4,7,9]
 print(list(map(a,x))) #maps all ele of x to a
 
-#filter
+#-------------------------------------------------------------------------------------------------------------------------------
+#4 filter
+
 def z(i):
     return i>2   #to print only ones that are greater than 2
 x = [1,2,3,4,5]
 print(list(filter(z,x)))
 
-#join
+#-------------------------------------------------------------------------------------------------------------------------------
+#5 join
+
 x = ['1','2']
 print(" ".join(x)) #join ele of x with spaces in between
 
-#enumerate - add counters to data
+#-------------------------------------------------------------------------------------------------------------------------------
+#6 enumerate - add counters to data
+
 x = [5,6,7,8,9]
 print(list(enumerate(x,start=0)))  #start the counter from 0
 
-#format - to edit the string
+#-------------------------------------------------------------------------------------------------------------------------------
+#7 format - to edit the string
+
 a = "{0} {1} of python"
 print(a.format(7,'tricks'))
 print(a.format('top 7','functions'))
+
+#-------------------------------------------------------------------------------------------------------------------------------
